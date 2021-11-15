@@ -21,7 +21,7 @@ const style = {
 
 
 const BookingModal = ({ openBooking, handleBookingClose, booking, date, setBookingSuccess }) => {
-    const { name, time, } = booking;
+    const { name, time, price } = booking;
     const { user } = useAuth()
 
     const initialInfo = { patientName: user.displayName, email: user.email, phone: '' }
@@ -43,6 +43,7 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date, setBooki
         const appointment = {
             ...bookingInfo,
             time,
+            price,
             serviceName: name,
             date: date.toLocaleDateString(),
         }
@@ -71,67 +72,67 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date, setBooki
 
     return (
         <div>
-            {/* <Button onClick={handleBookingOpen}>Open modal</Button> */}
+            {/* <Button onClick={handleBookingOpen}>Open modal</Button> */ }
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={openBooking}
-                onClose={handleBookingClose}
+                open={ openBooking }
+                onClose={ handleBookingClose }
                 closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
+                BackdropComponent={ Backdrop }
+                BackdropProps={ {
                     timeout: 500,
-                }}
+                } }
             >
-                <Fade in={openBooking}>
-                    <Box sx={style}>
+                <Fade in={ openBooking }>
+                    <Box sx={ style }>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            {name}
+                            { name }
                         </Typography>
-                        <form onSubmit={handleConfirmBooking}>
+                        <form onSubmit={ handleConfirmBooking }>
                             <TextField
                                 // label="Size"
                                 disabled
-                                sx={{ width: '95%', margin: 1 }}
+                                sx={ { width: '95%', margin: 1 } }
                                 id="filled-size-small"
-                                defaultValue={time}
+                                defaultValue={ time }
                                 // defaultValue="Small"
                                 variant="filled"
                                 size="small"
                             />
                             <TextField
-                                sx={{ width: '95%', margin: 1 }}
+                                sx={ { width: '95%', margin: 1 } }
                                 id="filled-size-small"
                                 name="patientName"
-                                onBlur={handleOnBlur}
-                                defaultValue={user.displayName}
+                                onBlur={ handleOnBlur }
+                                defaultValue={ user.displayName }
                                 variant="filled"
                                 size="small"
                             />
                             <TextField
-                                sx={{ width: '95%', margin: 1 }}
+                                sx={ { width: '95%', margin: 1 } }
                                 id="filled-size-small"
                                 name="email"
-                                defaultValue={user.email}
-                                onBlur={handleOnBlur}
+                                defaultValue={ user.email }
+                                onBlur={ handleOnBlur }
                                 variant="filled"
                                 size="small"
                             />
                             <TextField
-                                sx={{ width: '95%', margin: 1 }}
+                                sx={ { width: '95%', margin: 1 } }
                                 id="filled-size-small"
                                 name="phone"
                                 placeholder="Phone Number"
-                                onBlur={handleOnBlur}
+                                onBlur={ handleOnBlur }
                                 variant="filled"
                                 size="small"
                             />
                             <TextField
                                 disabled
-                                sx={{ width: '95%', margin: 1 }}
+                                sx={ { width: '95%', margin: 1 } }
                                 id="filled-size-small"
-                                defaultValue={date.toDateString()}
-                                onBlur={handleOnBlur}
+                                defaultValue={ date.toDateString() }
+                                onBlur={ handleOnBlur }
                                 variant="filled"
                                 size="small"
                             />

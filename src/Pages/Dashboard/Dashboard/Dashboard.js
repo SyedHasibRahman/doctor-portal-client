@@ -27,6 +27,7 @@ import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctor from './AddDoctor/AddDoctor';
 import useAuth from '../../../hooks/useAuth';
 import AdminRoute from '../../Login/AdminRoute/AdminRoute';
+import Payment from '../Payment/Payment';
 
 const drawerWidth = 200;
 
@@ -44,32 +45,32 @@ function Dashboard(props) {
         <div>
             <Toolbar />
             <Divider />
-            <NavLink style={{ textDecoration: 'none' }} to="/Appointment">
+            <NavLink style={ { textDecoration: 'none' } } to="/Appointment">
                 <Button color="inherit">Appointment</Button>
             </NavLink>
-            <NavLink style={{ textDecoration: 'none' }} to={`${url}`}>
+            <NavLink style={ { textDecoration: 'none' } } to={ `${url}` }>
                 <Button color="inherit">Dashboard</Button>
             </NavLink>
             {
                 admin && <Box>
-                    <NavLink style={{ textDecoration: 'none' }} to={`${url}/makeAdmin`}>
+                    <NavLink style={ { textDecoration: 'none' } } to={ `${url}/makeAdmin` }>
                         <Button color="inherit">Make Admin</Button>
                     </NavLink>
-                    <NavLink style={{ textDecoration: 'none' }} to={`${url}/addDoctor`}>
+                    <NavLink style={ { textDecoration: 'none' } } to={ `${url}/addDoctor` }>
                         <Button color="inherit">Add Doctor</Button>
                     </NavLink>
                 </Box>
             }
 
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
+                { ['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    <ListItem button key={ text }>
                         <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            { index % 2 === 0 ? <InboxIcon /> : <MailIcon /> }
                         </ListItemIcon>
-                        <ListItemText primary={text} />
+                        <ListItemText primary={ text } />
                     </ListItem>
-                ))}
+                )) }
             </List>
         </div>
     );
@@ -77,22 +78,22 @@ function Dashboard(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={ { display: 'flex' } }>
             <CssBaseline />
             <AppBar
                 position="fixed"
-                sx={{
+                sx={ {
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
-                }}
+                } }
             >
                 <Toolbar>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        onClick={ handleDrawerToggle }
+                        sx={ { mr: 2, display: { sm: 'none' } } }
                     >
                         <MenuIcon />
                     </IconButton>
@@ -103,50 +104,53 @@ function Dashboard(props) {
             </AppBar>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={ { width: { sm: drawerWidth }, flexShrink: { sm: 0 } } }
                 aria-label="mailbox folders"
             >
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                {/* The implementation can be swapped with js to avoid SEO duplication of links. */ }
                 <Drawer
-                    container={container}
+                    container={ container }
                     variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
+                    open={ mobileOpen }
+                    onClose={ handleDrawerToggle }
+                    ModalProps={ {
                         keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
+                    } }
+                    sx={ {
                         display: { xs: 'block', sm: 'none' },
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
+                    } }
                 >
-                    {drawer}
+                    { drawer }
                 </Drawer>
                 <Drawer
                     variant="permanent"
-                    sx={{
+                    sx={ {
                         display: { xs: 'none', sm: 'block' },
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
+                    } }
                     open
                 >
-                    {drawer}
+                    { drawer }
                 </Drawer>
             </Box>
             <Box
                 component="main"
-                sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={ { flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } } }
             >
                 <Toolbar />
 
                 <Switch>
-                    <Route exact path={path}>
+                    <Route exact path={ path }>
                         <DashboardHome />
                     </Route>
-                    <AdminRoute path={`${path}/makeAdmin`}>
+                    <Route path={ `${path}/payment/:appointmentId` }>
+                        <Payment />
+                    </Route>
+                    <AdminRoute path={ `${path}/makeAdmin` }>
                         <MakeAdmin></MakeAdmin>
                     </AdminRoute>
-                    <AdminRoute path={`${path}/AddDoctor`}>
+                    <AdminRoute path={ `${path}/AddDoctor` }>
                         <AddDoctor></AddDoctor>
                     </AdminRoute>
                 </Switch>

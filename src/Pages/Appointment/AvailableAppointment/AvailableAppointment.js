@@ -9,36 +9,42 @@ const bookings = [
         name: 'Teeth Orthodonics',
         time: '08.00 AM - 09.00 AM',
         space: 10,
+        price: 20,
     },
     {
         id: 2,
-        name: 'Teeth Orthodonics',
+        name: 'Pendiatric Dental',
         time: '08.00 AM - 09.00 AM',
         space: 10,
+        price: 25,
     },
     {
         id: 3,
-        name: 'Teeth Orthodonics',
+        name: 'Cosmetic Dentistray',
         time: '08.00 AM - 09.00 AM',
         space: 10,
+        price: 30,
     },
     {
         id: 4,
-        name: 'Teeth Orthodonics',
+        name: 'Cavity Protection',
         time: '08.00 AM - 09.00 AM',
         space: 10,
+        price: 35,
     },
     {
         id: 5,
-        name: 'Teeth Orthodonics',
+        name: 'Teeth Replacment',
         time: '08.00 AM - 09.00 AM',
         space: 10,
+        price: 40,
     },
     {
         id: 6,
         name: 'Oral Surgery',
         time: '08.00 AM - 09.00 AM',
         space: 10,
+        price: 45,
     }
 ]
 
@@ -47,21 +53,21 @@ const AvailableAppointment = ({ date }) => {
     const [bookingSuccess, setBookingSuccess] = useState(false);
     return (
         <Container>
-            <Typography sx={{ color: 'success.main', fontWeight: 300, py: 5 }} variant="h4" gutterBottom component="div">
-                AvailableAppointment on: {date.toDateString()}
+            <Typography sx={ { color: 'success.main', fontWeight: 300, py: 5 } } variant="h4" gutterBottom component="div">
+                AvailableAppointment on: { date.toDateString() }
             </Typography>
             {
                 bookingSuccess && <Alert severity="success">
                     Appointment <strong>Successfully!</strong>
                 </Alert>
             }
-            <Grid container spacing={2}>
+            <Grid container spacing={ 2 }>
                 {
                     bookings.map(booking => <Booking
-                        key={booking.id}
-                        booking={booking}
-                        date={date}
-                        setBookingSuccess={setBookingSuccess}
+                        key={ booking.id }
+                        booking={ booking }
+                        date={ date }
+                        setBookingSuccess={ setBookingSuccess }
                     ></Booking>)
                 }
             </Grid>
